@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using BitOpz.Core.Bases;
 
 namespace BitOpz.Core.Services
 {
-    internal class BitWizer
+    public class BitWizer : BitCore
     {
+        public BitWizer() : base()
+        { }
+
+        public
     }
 }
