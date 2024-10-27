@@ -84,5 +84,11 @@ namespace BitOpz.Core.Tests.UnitTests
         }
 
         #endregion Roll
+
+        #region Flip
+
+        // TODO: Implement
+
+        #endregion Flip
     }
 }

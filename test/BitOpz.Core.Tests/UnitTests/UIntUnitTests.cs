@@ -66,8 +66,8 @@ namespace BitOpz.Core.Tests.UnitTests
         }
 
         [Theory]
-        [InlineData(0b00100001_00000000_00000000_00000001, 2, 0b00000100_00000000_00000000_00000100)]
-        [InlineData(0b10100001_00000000_00000000_00000001, 2, 0b10000100_00000000_00000000_00000110)]
+        [InlineData(0b00100001_00000000_00000000_00000001, 2, 0b00000100_00000000_00000000_00000101)]
+        [InlineData(0b10100001_00000000_00000000_00000001, 2, 0b10000100_00000000_00000000_00000101)]
         public void TestSIntRollLeft(uint src, int shiftCnt, uint expect)
         {
             uint result = UIntExtensions.SignRollLeft(src, shiftCnt);
@@ -75,8 +75,8 @@ namespace BitOpz.Core.Tests.UnitTests
         }
 
         [Theory]
-        [InlineData(0b00100001_00000000_00000000_00000001, 2, 0b00100100_00100000_00000000_00000000)]
-        [InlineData(0b10100001_00000000_00000000_00000001, 2, 0b10110100_00100000_00000000_00000000)]
+        [InlineData(0b00100001_00000000_00000000_00000001, 2, 0b00101000_01000000_00000000_00000000)]
+        [InlineData(0b10100001_00000000_00000000_00000001, 2, 0b10101000_01000000_00000000_00000000)]
         public void TestSIntRollRight(uint src, int shiftCnt, uint expect)
         {
             uint result = UIntExtensions.SignRollRight(src, shiftCnt);
@@ -84,5 +84,11 @@ namespace BitOpz.Core.Tests.UnitTests
         }
 
         #endregion Roll
+
+        #region Flip
+
+        // TODO: Implement
+
+        #endregion Flip
     }
 }
