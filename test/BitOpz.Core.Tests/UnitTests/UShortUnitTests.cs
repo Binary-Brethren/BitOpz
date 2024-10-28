@@ -12,7 +12,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000001, 2, 0b10000100_00000100)]
         public void TestUShortShiftLeft(ushort src, int shiftCnt, ushort expect)
         {
-            ushort result = UShortExtensions.ShiftLeft(src, shiftCnt);
+            ushort result = src.ShiftLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -21,7 +21,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000001, 2, 0b00101000_01000000)]
         public void TestUShortShiftRight(ushort src, int shiftCnt, ushort expect)
         {
-            ushort result = UShortExtensions.ShiftRight(src, shiftCnt);
+            ushort result = src.ShiftRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -30,7 +30,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000001, 2, 0b10000100_00000100)]
         public void TestSShortShiftLeft(ushort src, int shiftCnt, ushort expect)
         {
-            ushort result = UShortExtensions.SignShiftLeft(src, shiftCnt);
+            ushort result = src.SignShiftLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -39,7 +39,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000001, 2, 0b10001000_01000000)]
         public void TestSShortShiftRight(ushort src, int shiftCnt, ushort expect)
         {
-            ushort result = UShortExtensions.SignShiftRight(src, shiftCnt);
+            ushort result = src.SignShiftRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -52,7 +52,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000001, 2, 0b10000100_00000110)]
         public void TestUShortRollLeft(ushort src, int shiftCnt, ushort expect)
         {
-            ushort result = UShortExtensions.RollLeft(src, shiftCnt);
+            ushort result = src.RollLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -61,7 +61,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000001, 2, 0b01101000_01000000)]
         public void TestUShortRollRight(ushort src, int shiftCnt, ushort expect)
         {
-            ushort result = UShortExtensions.RollRight(src, shiftCnt);
+            ushort result = src.RollRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -70,7 +70,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000001, 2, 0b10000100_00000101)]
         public void TestSShortRollLeft(ushort src, int shiftCnt, ushort expect)
         {
-            ushort result = UShortExtensions.SignRollLeft(src, shiftCnt);
+            ushort result = src.SignRollLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -79,7 +79,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000001, 2, 0b10101000_01000000)]
         public void TestSShortRollRight(ushort src, int shiftCnt, ushort expect)
         {
-            ushort result = UShortExtensions.SignRollRight(src, shiftCnt);
+            ushort result = src.SignRollRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -92,7 +92,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0xF00F, 0x0FF0)]
         public void TestFlipEndian(ushort src, ushort expect)
         {
-            ushort result = UShortExtensions.FlipEndian(src);
+            ushort result = src.FlipEndian();
             Assert.Equal(expect, result);
         }
 

@@ -12,7 +12,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000000_00000000_00000000_00000000_00000000_00000000_00000001, 2, 0b10000100_00000000_00000000_00000000_00000000_00000000_00000000_00000100)]
         public void TestULongShiftLeft(ulong src, int shiftCnt, ulong expect)
         {
-            ulong result = ULongExtensions.ShiftLeft(src, shiftCnt);
+            ulong result = src.ShiftLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -21,7 +21,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000000_00000000_00000000_00000000_00000000_00000000_00000001, 2, 0b00101000_01000000_00000000_00000000_00000000_00000000_00000000_00000000)]
         public void TestULongShiftRight(ulong src, int shiftCnt, ulong expect)
         {
-            ulong result = ULongExtensions.ShiftRight(src, shiftCnt);
+            ulong result = src.ShiftRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -30,7 +30,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000000_00000000_00000000_00000000_00000000_00000000_00000001, 2, 0b10000100_00000000_00000000_00000000_00000000_00000000_00000000_00000100)]
         public void TestSLongShiftLeft(ulong src, int shiftCnt, ulong expect)
         {
-            ulong result = ULongExtensions.SignShiftLeft(src, shiftCnt);
+            ulong result = src.SignShiftLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -39,7 +39,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000000_00000000_00000000_00000000_00000000_00000000_00000001, 2, 0b10001000_01000000_00000000_00000000_00000000_00000000_00000000_00000000)]
         public void TestSLongShiftRight(ulong src, int shiftCnt, ulong expect)
         {
-            ulong result = ULongExtensions.SignShiftRight(src, shiftCnt);
+            ulong result = src.SignShiftRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -52,7 +52,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000000_00000000_00000000_00000000_00000000_00000000_00000001, 2, 0b10000100_00000000_00000000_00000000_00000000_00000000_00000000_00000110)]
         public void TestULongRollLeft(ulong src, int shiftCnt, ulong expect)
         {
-            ulong result = ULongExtensions.RollLeft(src, shiftCnt);
+            ulong result = src.RollLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -61,7 +61,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000000_00000000_00000000_00000000_00000000_00000000_00000001, 2, 0b01101000_01000000_00000000_00000000_00000000_00000000_00000000_00000000)]
         public void TestULongRollRight(ulong src, int shiftCnt, ulong expect)
         {
-            ulong result = ULongExtensions.RollRight(src, shiftCnt);
+            ulong result = src.RollRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -70,7 +70,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000000_00000000_00000000_00000000_00000000_00000000_00000001, 2, 0b10000100_00000000_00000000_00000000_00000000_00000000_00000000_00000101)]
         public void TestSLongRollLeft(ulong src, int shiftCnt, ulong expect)
         {
-            ulong result = ULongExtensions.SignRollLeft(src, shiftCnt);
+            ulong result = src.SignRollLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -79,7 +79,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10100001_00000000_00000000_00000000_00000000_00000000_00000000_00000001, 2, 0b10101000_01000000_00000000_00000000_00000000_00000000_00000000_00000000)]
         public void TestSLongRollRight(ulong src, int shiftCnt, ulong expect)
         {
-            ulong result = ULongExtensions.SignRollRight(src, shiftCnt);
+            ulong result = src.SignRollRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -92,7 +92,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0xF00FF00FF00FF00F, 0x0FF00FF00FF00FF0)]
         public void TestFlipEndian(ulong src, ulong expect)
         {
-            ulong result = ULongExtensions.FlipEndian(src);
+            ulong result = src.FlipEndian();
             Assert.Equal(expect, result);
         }
 
