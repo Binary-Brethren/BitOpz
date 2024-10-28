@@ -12,7 +12,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10010001, 2, 0b01000100)]
         public void TestUByteShiftLeft(byte src, int shiftCnt, byte expect)
         {
-            byte result = UByteExtensions.ShiftLeft(src, shiftCnt);
+            byte result = src.ShiftLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -21,7 +21,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10010001, 2, 0b00100100)]
         public void TestUByteShiftRight(byte src, int shiftCnt, byte expect)
         {
-            byte result = UByteExtensions.ShiftRight(src, shiftCnt);
+            byte result = src.ShiftRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -30,7 +30,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10010001, 2, 0b11000100)]
         public void TestSByteShiftLeft(byte src, int shiftCnt, byte expect)
         {
-            byte result = UByteExtensions.SignShiftLeft(src, shiftCnt);
+            byte result = src.SignShiftLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -39,7 +39,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10010001, 2, 0b10000100)]
         public void TestSByteShiftRight(byte src, int shiftCnt, byte expect)
         {
-            byte result = UByteExtensions.SignShiftRight(src, shiftCnt);
+            byte result = src.SignShiftRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -52,7 +52,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10010001, 2, 0b01000110)]
         public void TestUByteRollLeft(byte src, int shiftCnt, byte expect)
         {
-            byte result = UByteExtensions.RollLeft(src, shiftCnt);
+            byte result = src.RollLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -61,7 +61,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10010001, 2, 0b01100100)]
         public void TestUByteRollRight(byte src, int shiftCnt, byte expect)
         {
-            byte result = UByteExtensions.RollRight(src, shiftCnt);
+            byte result = src.RollRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -70,7 +70,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10010001, 2, 0b11000100)]
         public void TestSByteRollLeft(byte src, int shiftCnt, byte expect)
         {
-            byte result = UByteExtensions.SignRollLeft(src, shiftCnt);
+            byte result = src.SignRollLeft(shiftCnt);
             Assert.Equal(expect, result);
         }
 
@@ -79,7 +79,7 @@ namespace BitOpz.Core.Tests.UnitTests
         [InlineData(0b10010001, 2, 0b10100100)]
         public void TestSByteRollRight(byte src, int shiftCnt, byte expect)
         {
-            byte result = UByteExtensions.SignRollRight(src, shiftCnt);
+            byte result = src.SignRollRight(shiftCnt);
             Assert.Equal(expect, result);
         }
 
