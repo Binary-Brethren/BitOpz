@@ -8,9 +8,9 @@
 
         public static ushort ShiftRight(this ushort value, int shift) => (ushort)(value >> shift);
 
-        public static ushort SignShiftLeft(this ushort value, int shift) => (ushort)(((value << shift) & BitOpzConsts.WORD_MAP_BITS) | (value & BitOpzConsts.WORD_SIGN_BIT));
+        public static ushort SignShiftLeft(this ushort value, int shift) => (ushort)(((value << shift) & BitOpzConsts.WORD_MASK_BITS) | (value & BitOpzConsts.WORD_SIGN_BIT));
 
-        public static ushort SignShiftRight(this ushort value, int shift) => (ushort)(((value & BitOpzConsts.WORD_MAP_BITS) >> shift) | (value & BitOpzConsts.WORD_SIGN_BIT));
+        public static ushort SignShiftRight(this ushort value, int shift) => (ushort)(((value & BitOpzConsts.WORD_MASK_BITS) >> shift) | (value & BitOpzConsts.WORD_SIGN_BIT));
 
         #endregion Shift
 
@@ -20,15 +20,23 @@
 
         public static ushort RollRight(this ushort value, int shift) => (ushort)((value >> shift) | (value << (BitOpzConsts.WORD_BITS - shift)));
 
-        public static ushort SignRollLeft(this ushort value, int shift) => (ushort)((((value << shift) | (value >> (BitOpzConsts.WORD_BITS - shift - 1))) & BitOpzConsts.WORD_MAP_BITS) | (value & BitOpzConsts.WORD_SIGN_BIT));
+        public static ushort SignRollLeft(this ushort value, int shift) => (ushort)((((value << shift) | (value >> (BitOpzConsts.WORD_BITS - shift - 1))) & BitOpzConsts.WORD_MASK_BITS) | (value & BitOpzConsts.WORD_SIGN_BIT));
 
-        public static ushort SignRollRight(this ushort value, int shift) => (ushort)(((((value & BitOpzConsts.WORD_MAP_BITS) >> shift) | (value << (BitOpzConsts.WORD_BITS - shift - 1))) & BitOpzConsts.WORD_MAP_BITS) | (value & BitOpzConsts.WORD_SIGN_BIT));
+        public static ushort SignRollRight(this ushort value, int shift) => (ushort)(((((value & BitOpzConsts.WORD_MASK_BITS) >> shift) | (value << (BitOpzConsts.WORD_BITS - shift - 1))) & BitOpzConsts.WORD_MASK_BITS) | (value & BitOpzConsts.WORD_SIGN_BIT));
 
         #endregion Roll
 
         #region Flip
 
-        // TODO: Implement
+        /*
+         * Functions marked "BitFlip" are set as "internal", as
+         * these are non-standard endianess flips that should be hidden
+         * until further validation can be done for their usecases.
+         */
+
+        public static ushort FlipEndian(this ushort value) => (ushort)(((value & BitOpzConsts.WORD_L_MASK) << BitOpzConsts.WORD_MOV) | ((value & BitOpzConsts.WORD_H_MASK) >> BitOpzConsts.WORD_MOV));
+
+        internal static ushort SignBitFlipEndian(this ushort value) => (ushort)0;
 
         #endregion Flip
     }

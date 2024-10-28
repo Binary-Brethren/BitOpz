@@ -87,7 +87,14 @@ namespace BitOpz.Core.Tests.UnitTests
 
         #region Flip
 
-        // TODO: Implement
+        [Theory]
+        [InlineData(0x123456780000FFFF, 0xFFFF000078563412)]
+        [InlineData(0xF00FF00FF00FF00F, 0x0FF00FF00FF00FF0)]
+        public void TestFlipEndian(ulong src, ulong expect)
+        {
+            ulong result = ULongExtensions.FlipEndian(src);
+            Assert.Equal(expect, result);
+        }
 
         #endregion Flip
     }
