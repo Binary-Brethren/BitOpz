@@ -84,5 +84,18 @@ namespace BitOpz.Core.Tests.UnitTests
         }
 
         #endregion Roll
+
+        #region Flip
+
+        [Theory]
+        [InlineData(0x1234, 0x3412)]
+        [InlineData(0xF00F, 0x0FF0)]
+        public void TestFlipEndian(ushort src, ushort expect)
+        {
+            ushort result = UShortExtensions.FlipEndian(src);
+            Assert.Equal(expect, result);
+        }
+
+        #endregion Flip
     }
 }

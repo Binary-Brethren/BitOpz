@@ -6,7 +6,5 @@ namespace BitOpz.Core.Services
     {
         public BitWizer() : base()
         { }
-
-        public
     }
 }
