@@ -34,7 +34,7 @@ jobs:
         config: ${{ github.workspace }}/.github/variables.yaml'      
     
     - name: TOOST
-      run: echo "${{ version.versionString }}"
+      run: echo "${{ versionString }}"
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
