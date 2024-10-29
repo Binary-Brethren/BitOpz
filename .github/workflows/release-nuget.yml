@@ -1,8 +1,5 @@
 name: Build and Publish NuGet Package
 
-relVars:
-  projectPath: './src/BitOpz.Core/'
-
 on:
   push:
     branches:
@@ -12,17 +9,33 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: windows-latest
+
+  read-yaml:
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Load Version Variables
-      id: version
-      uses: './.github/workflows/version.yaml'
-
     - name: Check Out Source Code
-    - uses: actions/checkout@v4
+      uses: actions/checkout@v4
+  
+    - name: Load Version Variables
+      uses: './.github/version.yaml'
+
+  build:
+    runs-on: windows-latest       
+
+    steps:    
+    - name: Check Out Source Code
+      uses: actions/checkout@v4
+
+    - name: Read YAML File
+      uses: pietrobolcato/action-read-yaml@1.0.0
+      id: read_action_js
+      with:
+        config: ${{ github.workspace }}/.github/variables.yaml'      
     
+    - name: TOOST
+      run: echo "${{ version.versionString }}"
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
