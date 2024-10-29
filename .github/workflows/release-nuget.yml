@@ -10,15 +10,7 @@ on:
 
 jobs:
 
-  read-yaml:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Check Out Source Code
-      uses: actions/checkout@v4
-  
-    - name: Load Version Variables
-      uses: './.github/version.yaml'
+ 
 
   build:
     runs-on: windows-latest       
@@ -29,12 +21,12 @@ jobs:
 
     - name: Read YAML File
       uses: pietrobolcato/action-read-yaml@1.0.0
-      id: read_action_js
+      id: read
       with:
         config: ${{ github.workspace }}/.github/variables.yaml'      
     
     - name: TOOST
-      run: echo "${{ versionString }}"
+      run: echo "${{ steps.read.versionString }}"
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
