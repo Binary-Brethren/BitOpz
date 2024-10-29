@@ -1,0 +1,44 @@
+name: Build and Publish NuGet Package
+
+relVars:
+  projectPath: './src/BitOpz.Core/'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Load Version Variables
+      id: version
+      uses: './.github/workflows/version.yaml'
+
+    - name: Check Out Source Code
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x' # Specify your .NET version here
+
+    - name: Restore Project Dependencies
+      run: dotnet restore
+
+    - name: Build Restored Project
+      run: dotnet build --no-restore
+
+    - name: Test Built Project
+      run: dotnet test --no-build --no-restore
+
+    - name: Pack NuGet Package
+      run: dotnet pack --no-build --no-restore --configuration Release --output ./nupkg /p:PackageVersion=${{ version.majorVersion }}.${{ version.minorVersion }}.${{ version.patchVersion }}
+      
+    - name: Publish NuGet Package
+      run: dotnet nuget push "./nupkg/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
