@@ -1,4 +1,4 @@
-name: Build, Test, Pack, and Publish NuGet Release Package
+name: Build, Test, Pack, and Publish NuGet Pre-Release Package
 
 on:
   push:
@@ -21,6 +21,9 @@ jobs:
       id: read
       with:
         config: ${{ github.workspace }}/.github/variables.yaml
+    
+    - name: TOOST
+      run: echo "${{ steps.read.outputs['prereleaseVersionString'] }}"
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -37,7 +40,7 @@ jobs:
       run: dotnet test --no-build --no-restore
 
     - name: Pack NuGet Package
-      run: dotnet pack --no-build --no-restore --configuration Release --output ./nupkg /p:PackageVersion=${{ steps.read.outputs['releaseVersionString'] }}
+      run: dotnet pack --no-build --no-restore --configuration Release --output ./nupkg /p:PackageVersion=${{ steps.read.outputs['prereleaseVersionString'] }}
       
     # - name: Publish NuGet Package
     #   run: dotnet nuget push "./nupkg/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
