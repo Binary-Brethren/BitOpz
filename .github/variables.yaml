@@ -4,5 +4,5 @@ patchVersion: 1
 releaseVersionString: '$(majorVersion).$(minorVersion).$(patchVersion)'
 
 prereleaseFix: 'build'
-prereleaseNumber: '$()-$(github.run_number)'
+prereleaseNumber: '$(github.run_number)'
 prereleaseVersionString: '$(majorVersion).$(minorVersion).$(patchVersion)-$(prereleaseFix)$(prereleaseNumber)'
