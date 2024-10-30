@@ -39,5 +39,5 @@ jobs:
     - name: Pack NuGet Package
       run: dotnet pack --no-build --no-restore --configuration Release --output ./nupkg /p:PackageVersion=${{ steps.read.outputs['releaseVersionString'] }}
       
-    # - name: Publish NuGet Package
-    #   run: dotnet nuget push "./nupkg/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+    - name: Publish NuGet Package
+      run: dotnet nuget push "./nupkg/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
