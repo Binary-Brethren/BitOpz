@@ -41,11 +41,12 @@ namespace BitOpz.Core.Bases
 
         #endregion constructors
 
-        private bool _isSigned = false;
-        private ulong _value = 0;
-        public bool IsSigned => _isSigned;
+        // Idk if we need these yet...
+        //private bool _isSigned = false;
+        //public bool IsSigned => _isSigned;
+        //public void SetSign(bool isSigned) => _isSigned = isSigned;
 
-        public void SetSign(bool isSigned) => _isSigned = isSigned;
+        protected ulong _value = 0;
 
         public void SetValue(ulong value) => _value = value;
 

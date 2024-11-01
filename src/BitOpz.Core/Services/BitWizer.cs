@@ -22,6 +22,14 @@ namespace BitOpz.Core.Services
 
         public void SaveHistory() => _history.Add(new BitWizerHistory<ulong>(AsULong(), AsULong()));
 
+        private void SaveHistory(ulong rawValue, ulong returnValue) => _history.Add(new BitWizerHistory<ulong>(rawValue, returnValue));
+
+        private void SaveHistory(ulong rawValue, uint returnValue) => _history.Add(new BitWizerHistory<uint>(rawValue, returnValue));
+
+        private void SaveHistory(ulong rawValue, ushort returnValue) => _history.Add(new BitWizerHistory<ushort>(rawValue, returnValue));
+
+        private void SaveHistory(ulong rawValue, byte returnValue) => _history.Add(new BitWizerHistory<byte>(rawValue, returnValue));
+
         public List<(ulong RawValue, object ReturnValue)> GetFullHistory() => _history.Select(x => x.GetSave()).ToList();
 
         public List<ulong> GetRawHistory() => _history.Select(x => x.GetSave().RawValue).ToList();
@@ -30,46 +38,71 @@ namespace BitOpz.Core.Services
 
         #endregion Control Functions
 
+        /*
+         * Likely that many of these could be converted into generic
+         * functions, only after we handle the signed cases of returns
+         * This is because our history forces unmanaged types, not
+         * specifically unsigned-unmanaged types.
+         *
+         * CAREFUL HERE!
+         * Ensure that generic types are limited to unmanaged types
+         * if this is to be implemented.
+         *
+         * Generic is the way to go, but we need a base-line first.
+         */
+
         #region Logical And
 
         public void AndStore(ulong a, ulong b)
         {
-            throw new System.NotImplementedException();
+            ulong result = (ulong)(a & b);
+            SetValue(result);
         }
 
         public void AndStore(uint a, uint b)
         {
-            throw new System.NotImplementedException();
+            uint result = (uint)(a & b);
+            SetValue((ulong)result);
         }
 
         public void AndStore(ushort a, ushort b)
         {
-            throw new System.NotImplementedException();
+            ushort result = (ushort)(a & b);
+            SetValue((ulong)result);
         }
 
         public void AndStore(byte a, byte b)
         {
-            throw new System.NotImplementedException();
+            byte result = (byte)(a & b);
+            SetValue((ulong)result);
         }
 
-        public ulong AndAsULong(ulong value)
+        public ulong AndReturn(ulong value)
         {
-            throw new System.NotImplementedException();
+            ulong result = (ulong)(value & AsULong());
+            SaveHistory(_value, result);
+            return result;
         }
 
-        public uint AndAsUInt(uint value)
+        public uint AndReturn(uint value)
         {
-            throw new System.NotImplementedException();
+            uint result = (uint)(value & AsUInt());
+            SaveHistory(_value, result);
+            return result;
         }
 
-        public ushort AndAsUShort(ushort value)
+        public ushort AndReturn(ushort value)
         {
-            throw new System.NotImplementedException();
+            ushort result = (ushort)(value & AsUShort());
+            SaveHistory(_value, result);
+            return result;
         }
 
-        public byte AndAsUByte(byte value)
+        public byte AndReturn(byte value)
         {
-            throw new System.NotImplementedException();
+            byte result = (byte)(value & AsUByte());
+            SaveHistory(_value, result);
+            return result;
         }
 
         #endregion Logical And
@@ -78,42 +111,54 @@ namespace BitOpz.Core.Services
 
         public void OrStore(ulong a, ulong b)
         {
-            throw new System.NotImplementedException();
+            ulong result = (ulong)(a | b);
+            SetValue(result);
         }
 
         public void OrStore(uint a, uint b)
         {
-            throw new System.NotImplementedException();
+            uint result = (uint)(a | b);
+            SetValue((ulong)result);
         }
 
         public void OrStore(ushort a, ushort b)
         {
-            throw new System.NotImplementedException();
+            ushort result = (ushort)(a | b);
+            SetValue((ulong)result);
         }
 
         public void OrStore(byte a, byte b)
         {
-            throw new System.NotImplementedException();
+            byte result = (byte)(a | b);
+            SetValue((ulong)result);
         }
 
-        public ulong OrAsULong(ulong value)
+        public ulong OrReturn(ulong value)
         {
-            throw new System.NotImplementedException();
+            ulong result = (ulong)(value | AsULong());
+            SaveHistory(_value, result);
+            return result;
         }
 
-        public uint OrAsUInt(uint value)
+        public uint OrReturn(uint value)
         {
-            throw new System.NotImplementedException();
+            uint result = (uint)(value | AsUInt());
+            SaveHistory(_value, result);
+            return result;
         }
 
-        public ushort OrAsUShort(ushort value)
+        public ushort OrReturn(ushort value)
         {
-            throw new System.NotImplementedException();
+            ushort result = (ushort)(value | AsUShort());
+            SaveHistory(_value, result);
+            return result;
         }
 
-        public byte OrAsUByte(byte value)
+        public byte OrReturn(byte value)
         {
-            throw new System.NotImplementedException();
+            byte result = (byte)(value | AsUByte());
+            SaveHistory(_value, result);
+            return result;
         }
 
         #endregion Logical Or
