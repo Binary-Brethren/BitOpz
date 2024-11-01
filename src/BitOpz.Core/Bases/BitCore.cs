@@ -4,13 +4,7 @@ namespace BitOpz.Core.Bases
 {
     public partial class BitCore
     {
-        private bool _isSigned = false;
-        private ulong _value = 0;
-        public bool IsSigned => _isSigned;
-
-        public void SetSign(bool isSigned) => _isSigned = isSigned;
-
-        public void SetValue(ulong value) => _value = value;
+        #region constructors
 
         /*
          * Most of these constructors can die after the implementation of BitWiser (or whatever else uses this base class)
@@ -44,6 +38,16 @@ namespace BitOpz.Core.Bases
 
         public BitCore(long value) : this((ulong)value)
         { }
+
+        #endregion constructors
+
+        private bool _isSigned = false;
+        private ulong _value = 0;
+        public bool IsSigned => _isSigned;
+
+        public void SetSign(bool isSigned) => _isSigned = isSigned;
+
+        public void SetValue(ulong value) => _value = value;
 
         #region Value Retrieval
 
