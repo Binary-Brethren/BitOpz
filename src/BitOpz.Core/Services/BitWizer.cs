@@ -26,27 +26,19 @@ namespace BitOpz.Core.Services
 
         public void SaveHistory() => _history.Add(new BitWizerHistory<ulong>(AsULong(), AsULong()));
 
-
         private void SaveHistory(ulong rawValue, ulong returnValue) => _history.Add(new BitWizerHistory<ulong>(rawValue, returnValue));
-
 
         private void SaveHistory(ulong rawValue, uint returnValue) => _history.Add(new BitWizerHistory<uint>(rawValue, returnValue));
 
-
         private void SaveHistory(ulong rawValue, ushort returnValue) => _history.Add(new BitWizerHistory<ushort>(rawValue, returnValue));
-
 
         private void SaveHistory(ulong rawValue, byte returnValue) => _history.Add(new BitWizerHistory<byte>(rawValue, returnValue));
 
-
         public List<(ulong RawValue, object ReturnValue)> GetFullHistory() => _history.Select(x => x.GetSave()).ToList();
-
 
         public List<ulong> GetRawHistory() => _history.Select(x => x.GetSave().RawValue).ToList();
 
-
         public List<object> GetReturnHistory() => _history.Select(x => x.GetSave().ReturnValue).ToList();
-
 
         public void ClearHistory() => _history.Clear();
 
