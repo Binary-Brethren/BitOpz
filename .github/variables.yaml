@@ -1,6 +1,6 @@
 minorVersion: 0
 majorVersion: 0
-patchVersion: 1
+patchVersion: 2
 releaseVersionString: '$(majorVersion).$(minorVersion).$(patchVersion)'
 
 prereleaseFix: 'build'
