@@ -48,7 +48,7 @@ namespace BitOpz.Core.Bases
 
         protected ulong _value = 0;
 
-        public void SetValue(ulong value) => _value = value;
+        protected void SetValue(ulong value) => _value = value;
 
         #region Value Retrieval
 
@@ -75,7 +75,7 @@ namespace BitOpz.Core.Bases
         }
 
         public int AsInt()
-        { return (int)AsUInt(0); }
+        { return (int)AsInt(0); }
 
         public int AsInt(int bitSplit)
         {

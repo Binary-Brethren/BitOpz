@@ -28,15 +28,10 @@
 
         #region Flip
 
-        /*
-         * Functions marked "BitFlip" are hidden from the public API, as
-         * these are non-standard endianess flips that should be hidden
-         * until further validation can be done for their usecases.
-         */
+
 
         internal static byte BitFlipEndian(this byte value) => (byte)((value << 4) | (value >> 4));
 
-        internal static byte SignBitFlipEndian(this byte value) => (byte)(((value << 4) & BitOpzConsts.BYTE_MASK_BITS) | ((value & BitOpzConsts.BYTE_MASK_BITS) >> 4) | (value & BitOpzConsts.BYTE_SIGN_BIT));
 
         #endregion Flip
     }

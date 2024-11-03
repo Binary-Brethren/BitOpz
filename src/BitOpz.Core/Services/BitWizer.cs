@@ -1,40 +1,69 @@
-﻿using BitOpz.Core.Bases;
-using BitOpz.Core.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using BitOpz.Core.Bases;
+using BitOpz.Core.Models;
 
 namespace BitOpz.Core.Services
 {
-    public class BitWizer : BitCore
+    public class BitWizer : BitCore, IBitWizer
     {
+        private readonly IList<IBitWizerSave> _history;
+
         #region constructors
 
-        public BitWizer() : base()
+        public BitWizer()
         {
             _history = new List<IBitWizerSave>();
         }
 
         #endregion constructors
 
-        private IList<IBitWizerSave> _history;
-
         #region Control Functions
 
-        public void SaveHistory() => _history.Add(new BitWizerHistory<ulong>(AsULong(), AsULong()));
+        public void SaveHistory()
+        {
+            _history.Add(new BitWizerHistory<ulong>(AsULong(), AsULong()));
+        }
 
-        private void SaveHistory(ulong rawValue, ulong returnValue) => _history.Add(new BitWizerHistory<ulong>(rawValue, returnValue));
+        private void SaveHistory(ulong rawValue, ulong returnValue)
+        {
+            _history.Add(new BitWizerHistory<ulong>(rawValue, returnValue));
+        }
 
-        private void SaveHistory(ulong rawValue, uint returnValue) => _history.Add(new BitWizerHistory<uint>(rawValue, returnValue));
+        private void SaveHistory(ulong rawValue, uint returnValue)
+        {
+            _history.Add(new BitWizerHistory<uint>(rawValue, returnValue));
+        }
 
-        private void SaveHistory(ulong rawValue, ushort returnValue) => _history.Add(new BitWizerHistory<ushort>(rawValue, returnValue));
+        private void SaveHistory(ulong rawValue, ushort returnValue)
+        {
+            _history.Add(new BitWizerHistory<ushort>(rawValue, returnValue));
+        }
 
-        private void SaveHistory(ulong rawValue, byte returnValue) => _history.Add(new BitWizerHistory<byte>(rawValue, returnValue));
+        private void SaveHistory(ulong rawValue, byte returnValue)
+        {
+            _history.Add(new BitWizerHistory<byte>(rawValue, returnValue));
+        }
 
-        public List<(ulong RawValue, object ReturnValue)> GetFullHistory() => _history.Select(x => x.GetSave()).ToList();
+        public List<(ulong RawValue, object ReturnValue)> GetFullHistory()
+        {
+            return _history.Select(x => x.GetSave()).ToList();
+        }
 
-        public List<ulong> GetRawHistory() => _history.Select(x => x.GetSave().RawValue).ToList();
+        public List<ulong> GetRawHistory()
+        {
+            return _history.Select(x => x.GetSave().RawValue).ToList();
+        }
 
-        public List<object> GetReturnHistory() => _history.Select(x => x.GetSave().ReturnValue).ToList();
+        public List<object> GetReturnHistory()
+        {
+            return _history.Select(x => x.GetSave().ReturnValue).ToList();
+        }
+
+        public void ClearHistory()
+        {
+            _history.Clear();
+        }
 
         #endregion Control Functions
 
@@ -55,52 +84,52 @@ namespace BitOpz.Core.Services
 
         public void AndStore(ulong a, ulong b)
         {
-            ulong result = (ulong)(a & b);
+            var result = a & b;
             SetValue(result);
         }
 
         public void AndStore(uint a, uint b)
         {
-            uint result = (uint)(a & b);
-            SetValue((ulong)result);
+            var result = a & b;
+            SetValue(result);
         }
 
         public void AndStore(ushort a, ushort b)
         {
-            ushort result = (ushort)(a & b);
-            SetValue((ulong)result);
+            var result = (ushort)(a & b);
+            SetValue(result);
         }
 
         public void AndStore(byte a, byte b)
         {
-            byte result = (byte)(a & b);
-            SetValue((ulong)result);
+            var result = (byte)(a & b);
+            SetValue(result);
         }
 
         public ulong AndReturn(ulong value)
         {
-            ulong result = (ulong)(value & AsULong());
+            var result = value & AsULong();
             SaveHistory(_value, result);
             return result;
         }
 
         public uint AndReturn(uint value)
         {
-            uint result = (uint)(value & AsUInt());
+            var result = value & AsUInt();
             SaveHistory(_value, result);
             return result;
         }
 
         public ushort AndReturn(ushort value)
         {
-            ushort result = (ushort)(value & AsUShort());
+            var result = (ushort)(value & AsUShort());
             SaveHistory(_value, result);
             return result;
         }
 
         public byte AndReturn(byte value)
         {
-            byte result = (byte)(value & AsUByte());
+            var result = (byte)(value & AsUByte());
             SaveHistory(_value, result);
             return result;
         }
@@ -111,52 +140,52 @@ namespace BitOpz.Core.Services
 
         public void OrStore(ulong a, ulong b)
         {
-            ulong result = (ulong)(a | b);
+            var result = a | b;
             SetValue(result);
         }
 
         public void OrStore(uint a, uint b)
         {
-            uint result = (uint)(a | b);
-            SetValue((ulong)result);
+            var result = a | b;
+            SetValue(result);
         }
 
         public void OrStore(ushort a, ushort b)
         {
-            ushort result = (ushort)(a | b);
-            SetValue((ulong)result);
+            var result = (ushort)(a | b);
+            SetValue(result);
         }
 
         public void OrStore(byte a, byte b)
         {
-            byte result = (byte)(a | b);
-            SetValue((ulong)result);
+            var result = (byte)(a | b);
+            SetValue(result);
         }
 
         public ulong OrReturn(ulong value)
         {
-            ulong result = (ulong)(value | AsULong());
+            var result = value | AsULong();
             SaveHistory(_value, result);
             return result;
         }
 
         public uint OrReturn(uint value)
         {
-            uint result = (uint)(value | AsUInt());
+            var result = value | AsUInt();
             SaveHistory(_value, result);
             return result;
         }
 
         public ushort OrReturn(ushort value)
         {
-            ushort result = (ushort)(value | AsUShort());
+            var result = (ushort)(value | AsUShort());
             SaveHistory(_value, result);
             return result;
         }
 
         public byte OrReturn(byte value)
         {
-            byte result = (byte)(value | AsUByte());
+            var result = (byte)(value | AsUByte());
             SaveHistory(_value, result);
             return result;
         }
