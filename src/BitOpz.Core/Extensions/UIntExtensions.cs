@@ -28,9 +28,7 @@
 
         #region Flip
 
-
         public static uint FlipEndian(this uint value) => (uint)((value & BitOpzConsts.DWORD_LL_MASK) << BitOpzConsts.DWORD_H_MOV) | ((value & BitOpzConsts.DWORD_LH_MASK) << BitOpzConsts.DWORD_L_MOV) | ((value & BitOpzConsts.DWORD_HL_MASK) >> BitOpzConsts.DWORD_L_MOV) | ((value & BitOpzConsts.DWORD_HH_MASK) >> BitOpzConsts.DWORD_H_MOV);
-
 
         #endregion Flip
     }

@@ -27,11 +27,8 @@
         #endregion Roll
 
         #region Flip
-
-
-
-        internal static byte BitFlipEndian(this byte value) => (byte)((value << 4) | (value >> 4));
-
+        /* Let's be honest... this is a bit of a waste of time... */
+        private static byte BitFlipEndian(this byte value) => (byte)((value << 4) | (value >> 4));
 
         #endregion Flip
     }

@@ -28,9 +28,7 @@
 
         #region Flip
 
-
         public static ulong FlipEndian(this ulong value) => (ulong)((value & BitOpzConsts.QWORD_LLL_MASK) << BitOpzConsts.QWORD_HH_MOV) | ((value & BitOpzConsts.QWORD_LLH_MASK) << BitOpzConsts.QWORD_HL_MOV) | ((value & BitOpzConsts.QWORD_LHL_MASK) << BitOpzConsts.QWORD_LH_MOV) | ((value & BitOpzConsts.QWORD_LHH_MASK) << BitOpzConsts.QWORD_LL_MOV) | ((value & BitOpzConsts.QWORD_HLL_MASK) >> BitOpzConsts.QWORD_LL_MOV) | ((value & BitOpzConsts.QWORD_HLH_MASK) >> BitOpzConsts.QWORD_LH_MOV) | ((value & BitOpzConsts.QWORD_HHL_MASK) >> BitOpzConsts.QWORD_HL_MOV) | ((value & BitOpzConsts.QWORD_HHH_MASK) >> BitOpzConsts.QWORD_HH_MOV);
-
 
         #endregion Flip
     }

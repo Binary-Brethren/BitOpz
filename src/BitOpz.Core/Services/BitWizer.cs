@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using System.Linq;
 using BitOpz.Core.Bases;
 using BitOpz.Core.Models;
+
+#endregion
 
 namespace BitOpz.Core.Services
 {
@@ -20,50 +24,31 @@ namespace BitOpz.Core.Services
 
         #region Control Functions
 
-        public void SaveHistory()
-        {
-            _history.Add(new BitWizerHistory<ulong>(AsULong(), AsULong()));
-        }
+        public void SaveHistory() => _history.Add(new BitWizerHistory<ulong>(AsULong(), AsULong()));
 
-        private void SaveHistory(ulong rawValue, ulong returnValue)
-        {
-            _history.Add(new BitWizerHistory<ulong>(rawValue, returnValue));
-        }
 
-        private void SaveHistory(ulong rawValue, uint returnValue)
-        {
-            _history.Add(new BitWizerHistory<uint>(rawValue, returnValue));
-        }
+        private void SaveHistory(ulong rawValue, ulong returnValue) => _history.Add(new BitWizerHistory<ulong>(rawValue, returnValue));
 
-        private void SaveHistory(ulong rawValue, ushort returnValue)
-        {
-            _history.Add(new BitWizerHistory<ushort>(rawValue, returnValue));
-        }
 
-        private void SaveHistory(ulong rawValue, byte returnValue)
-        {
-            _history.Add(new BitWizerHistory<byte>(rawValue, returnValue));
-        }
+        private void SaveHistory(ulong rawValue, uint returnValue) => _history.Add(new BitWizerHistory<uint>(rawValue, returnValue));
 
-        public List<(ulong RawValue, object ReturnValue)> GetFullHistory()
-        {
-            return _history.Select(x => x.GetSave()).ToList();
-        }
 
-        public List<ulong> GetRawHistory()
-        {
-            return _history.Select(x => x.GetSave().RawValue).ToList();
-        }
+        private void SaveHistory(ulong rawValue, ushort returnValue) => _history.Add(new BitWizerHistory<ushort>(rawValue, returnValue));
 
-        public List<object> GetReturnHistory()
-        {
-            return _history.Select(x => x.GetSave().ReturnValue).ToList();
-        }
 
-        public void ClearHistory()
-        {
-            _history.Clear();
-        }
+        private void SaveHistory(ulong rawValue, byte returnValue) => _history.Add(new BitWizerHistory<byte>(rawValue, returnValue));
+
+
+        public List<(ulong RawValue, object ReturnValue)> GetFullHistory() => _history.Select(x => x.GetSave()).ToList();
+
+
+        public List<ulong> GetRawHistory() => _history.Select(x => x.GetSave().RawValue).ToList();
+
+
+        public List<object> GetReturnHistory() => _history.Select(x => x.GetSave().ReturnValue).ToList();
+
+
+        public void ClearHistory() => _history.Clear();
 
         #endregion Control Functions
 
