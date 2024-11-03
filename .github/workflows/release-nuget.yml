@@ -1,4 +1,4 @@
-name: Build and Publish NuGet Package
+name: Build, Test, Pack, and Publish NuGet Release Package
 
 on:
   push:
@@ -20,10 +20,7 @@ jobs:
       uses: pietrobolcato/action-read-yaml@1.0.0
       id: read
       with:
-        config: ${{ github.workspace }}/.github/variables.yaml'      
-    
-    - name: TOOST
-      run: echo "${{ steps.read.minorVersion }}"
+        config: ${{ github.workspace }}/.github/variables.yaml
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -34,13 +31,13 @@ jobs:
       run: dotnet restore
 
     - name: Build Restored Project
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration Release
 
     - name: Test Built Project
-      run: dotnet test --no-build --no-restore
+      run: dotnet test --no-build --no-restore --configuration Release
 
     - name: Pack NuGet Package
-      run: dotnet pack --no-build --no-restore --configuration Release --output ./nupkg /p:PackageVersion=${{ steps.read.versionString }}
+      run: dotnet pack --no-build --no-restore --configuration Release --output nupkgs /p:PackageVersion=${{ steps.read.outputs['releaseVersionString'] }}
       
-    # - name: Publish NuGet Package
-    #   run: dotnet nuget push "./nupkg/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+    - name: Publish NuGet Package
+      run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}

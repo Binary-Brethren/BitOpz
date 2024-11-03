@@ -1,5 +1,8 @@
 minorVersion: 0
 majorVersion: 0
 patchVersion: 1
-versionString: '$(majorVersion).$(minorVersion).$(patchVersion)'
-projectPath: './src/BitOpz.Core/'
+releaseVersionString: '$(majorVersion).$(minorVersion).$(patchVersion)'
+
+prereleaseFix: 'build'
+prereleaseNumber: ${{ github.run_number }}
+prereleaseVersionString: '$(majorVersion).$(minorVersion).$(patchVersion)-$(prereleaseFix)$(prereleaseNumber)'
