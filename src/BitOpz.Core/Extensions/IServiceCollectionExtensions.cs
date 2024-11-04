@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BitOpz.Core.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BitOpz.Core.Extensions
 {
@@ -6,7 +7,8 @@ namespace BitOpz.Core.Extensions
     {
         public static IServiceCollection ConfigureBitWizerServices(this IServiceCollection services)
         {
-            return services;
+            return services
+                .AddTransient<IBitWizer, BitWizer>();
         }
     }
 }

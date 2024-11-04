@@ -28,15 +28,7 @@
 
         #region Flip
 
-        /*
-         * Functions marked "BitFlip" are set as "internal", as
-         * these are non-standard endianess flips that should be hidden
-         * until further validation can be done for their usecases.
-         */
-
         public static ushort FlipEndian(this ushort value) => (ushort)(((value & BitOpzConsts.WORD_L_MASK) << BitOpzConsts.WORD_MOV) | ((value & BitOpzConsts.WORD_H_MASK) >> BitOpzConsts.WORD_MOV));
-
-        internal static ushort SignBitFlipEndian(this ushort value) => (ushort)0;
 
         #endregion Flip
     }
