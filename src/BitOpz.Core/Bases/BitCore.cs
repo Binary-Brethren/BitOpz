@@ -46,7 +46,7 @@ namespace BitOpz.Core.Bases
         //public bool IsSigned => _isSigned;
         //public void SetSign(bool isSigned) => _isSigned = isSigned;
 
-        protected ulong _value = 0;
+        private ulong _value = 0;
 
         protected void SetValue(ulong value) => _value = value;
 

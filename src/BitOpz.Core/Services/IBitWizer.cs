@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
+using BitOpz.Core.Models;
 
 namespace BitOpz.Core.Services
 {
     public interface IBitWizer
     {
-        public void SaveHistory();
-        public List<(ulong RawValue, object ReturnValue)> GetFullHistory();
-        public List<ulong> GetRawHistory();
-        public List<object> GetReturnHistory();
+        public List<BitWizerHistory> GetHistory();
         public void ClearHistory();
         public void AndStore(ulong a, ulong b);
         public void AndStore(uint a, uint b);
@@ -25,6 +23,14 @@ namespace BitOpz.Core.Services
         public uint OrReturn(uint value);
         public ushort OrReturn(ushort value);
         public byte OrReturn(byte value);
+        public void XorStore(ulong a, ulong b);
+        public void XorStore(uint a, uint b);
+        public void XorStore(ushort a, ushort b);
+        public void XorStore(byte a, byte b);
+        public ulong XorReturn(ulong value);
+        public uint XorReturn(uint value);
+        public ushort XorReturn(ushort value);
+        public byte XorReturn(byte value);
         public ulong AsULong();
         public long AsLong();
         public uint AsUInt();

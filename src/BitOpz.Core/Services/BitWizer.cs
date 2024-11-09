@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using BitOpz.Core.Bases;
+using BitOpz.Core.Enums;
 using BitOpz.Core.Models;
 
 #endregion
@@ -24,21 +25,7 @@ namespace BitOpz.Core.Services
 
         #region Control Functions
 
-        public void SaveHistory() => _history.Add(new BitWizerHistory<ulong>(AsULong(), AsULong()));
-
-        private void SaveHistory(ulong rawValue, ulong returnValue) => _history.Add(new BitWizerHistory<ulong>(rawValue, returnValue));
-
-        private void SaveHistory(ulong rawValue, uint returnValue) => _history.Add(new BitWizerHistory<uint>(rawValue, returnValue));
-
-        private void SaveHistory(ulong rawValue, ushort returnValue) => _history.Add(new BitWizerHistory<ushort>(rawValue, returnValue));
-
-        private void SaveHistory(ulong rawValue, byte returnValue) => _history.Add(new BitWizerHistory<byte>(rawValue, returnValue));
-
-        public List<(ulong RawValue, object ReturnValue)> GetFullHistory() => _history.Select(x => x.GetSave()).ToList();
-
-        public List<ulong> GetRawHistory() => _history.Select(x => x.GetSave().RawValue).ToList();
-
-        public List<object> GetReturnHistory() => _history.Select(x => x.GetSave().ReturnValue).ToList();
+        public List<BitWizerHistory> GetHistory() => _history.Select(x => x.GetSave()).ToList();
 
         public void ClearHistory() => _history.Clear();
 
@@ -63,51 +50,59 @@ namespace BitOpz.Core.Services
         {
             var result = a & b;
             SetValue(result);
+            _history.Add(new BitWizerSave<ulong>(a, BitWizerHistoryEnums.BitWizerAction.AND, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
         }
 
         public void AndStore(uint a, uint b)
         {
             var result = a & b;
             SetValue(result);
+            _history.Add(new BitWizerSave<uint>(a, BitWizerHistoryEnums.BitWizerAction.AND, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
         }
 
         public void AndStore(ushort a, ushort b)
         {
             var result = (ushort)(a & b);
             SetValue(result);
+            _history.Add(new BitWizerSave<ushort>(a, BitWizerHistoryEnums.BitWizerAction.AND, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
         }
 
         public void AndStore(byte a, byte b)
         {
             var result = (byte)(a & b);
             SetValue(result);
+            _history.Add(new BitWizerSave<byte>(a, BitWizerHistoryEnums.BitWizerAction.AND, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
         }
 
         public ulong AndReturn(ulong value)
         {
-            var result = value & AsULong();
-            SaveHistory(_value, result);
+            var stored = AsULong();
+            var result = value & stored;
+            _history.Add(new BitWizerSave<ulong>(value, BitWizerHistoryEnums.BitWizerAction.AND, stored, (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
             return result;
         }
 
         public uint AndReturn(uint value)
         {
-            var result = value & AsUInt();
-            SaveHistory(_value, result);
+            var stored = AsUInt();
+            var result = value & stored;
+            _history.Add(new BitWizerSave<uint>(value, BitWizerHistoryEnums.BitWizerAction.AND, stored, (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
             return result;
         }
 
         public ushort AndReturn(ushort value)
         {
-            var result = (ushort)(value & AsUShort());
-            SaveHistory(_value, result);
+            var stored = AsUShort();
+            var result = (ushort)(value & stored);
+            _history.Add(new BitWizerSave<ushort>(value, BitWizerHistoryEnums.BitWizerAction.AND, stored, (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
             return result;
         }
 
         public byte AndReturn(byte value)
         {
-            var result = (byte)(value & AsUByte());
-            SaveHistory(_value, result);
+            var stored = AsUByte();
+            var result = (byte)(value & stored);
+            _history.Add(new BitWizerSave<byte>(value, BitWizerHistoryEnums.BitWizerAction.AND, AsUByte(), (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
             return result;
         }
 
@@ -119,54 +114,126 @@ namespace BitOpz.Core.Services
         {
             var result = a | b;
             SetValue(result);
+            _history.Add(new BitWizerSave<ulong>(a, BitWizerHistoryEnums.BitWizerAction.OR, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
         }
 
         public void OrStore(uint a, uint b)
         {
             var result = a | b;
             SetValue(result);
+            _history.Add(new BitWizerSave<uint>(a, BitWizerHistoryEnums.BitWizerAction.OR, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
         }
 
         public void OrStore(ushort a, ushort b)
         {
             var result = (ushort)(a | b);
             SetValue(result);
+            _history.Add(new BitWizerSave<ushort>(a, BitWizerHistoryEnums.BitWizerAction.OR, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
         }
 
         public void OrStore(byte a, byte b)
         {
             var result = (byte)(a | b);
             SetValue(result);
+            _history.Add(new BitWizerSave<byte>(a, BitWizerHistoryEnums.BitWizerAction.OR, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
         }
 
         public ulong OrReturn(ulong value)
         {
-            var result = value | AsULong();
-            SaveHistory(_value, result);
+            var stored = AsULong();
+            var result = value | stored;
+            _history.Add(new BitWizerSave<ulong>(value, BitWizerHistoryEnums.BitWizerAction.OR, stored, (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
             return result;
         }
 
         public uint OrReturn(uint value)
         {
-            var result = value | AsUInt();
-            SaveHistory(_value, result);
+            var stored = AsUInt();
+            var result = value | stored;
+            _history.Add(new BitWizerSave<uint>(value, BitWizerHistoryEnums.BitWizerAction.OR, stored, (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
             return result;
         }
 
         public ushort OrReturn(ushort value)
         {
-            var result = (ushort)(value | AsUShort());
-            SaveHistory(_value, result);
+            var stored = AsUShort();
+            var result = (ushort)(value | stored);
+            _history.Add(new BitWizerSave<ushort>(value, BitWizerHistoryEnums.BitWizerAction.OR, stored, (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
             return result;
         }
 
         public byte OrReturn(byte value)
         {
-            var result = (byte)(value | AsUByte());
-            SaveHistory(_value, result);
+            var stored = AsUByte();
+            var result = (byte)(value | stored);
+            _history.Add(new BitWizerSave<byte>(value, BitWizerHistoryEnums.BitWizerAction.OR, AsUByte(), (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
             return result;
         }
 
         #endregion Logical Or
+
+        #region Logical Xor
+
+        public void XorStore(ulong a, ulong b)
+        {
+            var result = a ^ b;
+            SetValue(result);
+            _history.Add(new BitWizerSave<ulong>(a, BitWizerHistoryEnums.BitWizerAction.XOR, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
+        }
+
+        public void XorStore(uint a, uint b)
+        {
+            var result = a ^ b;
+            SetValue(result);
+            _history.Add(new BitWizerSave<uint>(a, BitWizerHistoryEnums.BitWizerAction.XOR, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
+        }
+
+        public void XorStore(ushort a, ushort b)
+        {
+            var result = (ushort)(a ^ b);
+            SetValue(result);
+            _history.Add(new BitWizerSave<ushort>(a, BitWizerHistoryEnums.BitWizerAction.XOR, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
+        }
+
+        public void XorStore(byte a, byte b)
+        {
+            var result = (byte)(a ^ b);
+            SetValue(result);
+            _history.Add(new BitWizerSave<byte>(a, BitWizerHistoryEnums.BitWizerAction.XOR, b, (ulong)result, BitWizerHistoryEnums.BitWizerResult.STORE, result));
+        }
+
+        public ulong XorReturn(ulong value)
+        {
+            var stored = AsULong();
+            var result = value ^ stored;
+            _history.Add(new BitWizerSave<ulong>(value, BitWizerHistoryEnums.BitWizerAction.XOR, stored, (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
+            return result;
+        }
+
+        public uint XorReturn(uint value)
+        {
+            var stored = AsUInt();
+            var result = value ^ stored;
+            _history.Add(new BitWizerSave<uint>(value, BitWizerHistoryEnums.BitWizerAction.XOR, stored, (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
+            return result;
+        }
+
+        public ushort XorReturn(ushort value)
+        {
+            var stored = AsUShort();
+            var result = (ushort)(value ^ stored);
+            _history.Add(new BitWizerSave<ushort>(value, BitWizerHistoryEnums.BitWizerAction.XOR, stored, (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
+            return result;
+        }
+
+        public byte XorReturn(byte value)
+        {
+            var stored = AsUByte();
+            var result = (byte)(value ^ stored);
+            _history.Add(new BitWizerSave<byte>(value, BitWizerHistoryEnums.BitWizerAction.XOR, AsUByte(), (ulong)result, BitWizerHistoryEnums.BitWizerResult.RETURN, result));
+            return result;
+        }
+
+        #endregion
     }
 }
