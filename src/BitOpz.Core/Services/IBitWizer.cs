@@ -1,12 +1,23 @@
-﻿using System.Collections.Generic;
+﻿#region
+
+using System.Collections.Generic;
 using BitOpz.Core.Models;
+
+#endregion
 
 namespace BitOpz.Core.Services
 {
     public interface IBitWizer
     {
+        #region Control Functions
+
         public List<BitWizerHistory> GetHistory();
         public void ClearHistory();
+
+        #endregion
+
+        #region Logical And
+
         public void AndStore(ulong a, ulong b);
         public void AndStore(uint a, uint b);
         public void AndStore(ushort a, ushort b);
@@ -15,6 +26,12 @@ namespace BitOpz.Core.Services
         public uint AndReturn(uint value);
         public ushort AndReturn(ushort value);
         public byte AndReturn(byte value);
+
+        #endregion
+
+
+        #region Logical Or
+
         public void OrStore(ulong a, ulong b);
         public void OrStore(uint a, uint b);
         public void OrStore(ushort a, ushort b);
@@ -23,6 +40,11 @@ namespace BitOpz.Core.Services
         public uint OrReturn(uint value);
         public ushort OrReturn(ushort value);
         public byte OrReturn(byte value);
+
+        #endregion
+
+        #region Logical Xor
+
         public void XorStore(ulong a, ulong b);
         public void XorStore(uint a, uint b);
         public void XorStore(ushort a, ushort b);
@@ -31,6 +53,11 @@ namespace BitOpz.Core.Services
         public uint XorReturn(uint value);
         public ushort XorReturn(ushort value);
         public byte XorReturn(byte value);
+
+        #endregion
+
+        #region BitCore Inheritted Returns
+
         public ulong AsULong();
         public long AsLong();
         public uint AsUInt();
@@ -45,5 +72,7 @@ namespace BitOpz.Core.Services
         public byte AsUByte(int bitSplit);
         public sbyte AsSByte();
         public sbyte AsSByte(int bitSplit);
+
+        #endregion
     }
 }
